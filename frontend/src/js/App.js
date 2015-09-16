@@ -121,7 +121,7 @@ App.isLogin = function(){
 App.doLogin = function(user){
     this.user = user;
     $.ajax({
-        url: "/api/is_logged", 
+        url: App.config.API_URL + "/is_logged", 
         dataType:"JSON",
         success: function(usercomplete) {
             App.user = usercomplete;
