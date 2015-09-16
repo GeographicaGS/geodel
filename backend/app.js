@@ -4,6 +4,13 @@ var config = require('./config');
 var app = express();
 var db = require("./db/db");
 
+app.use(function(req,res,next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "auth-hash,auth-username,auth-timestamp,Content-Type");
+    res.header("Access-Control-Allow-Methods","GET,POST,PUT,DELETE");
+    next();
+});
+
 db.init(function(err){
     if (err){
         throw err;
