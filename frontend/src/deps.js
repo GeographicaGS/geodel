@@ -9,7 +9,8 @@ deps.JS = [
     'js/lib/backbone-1.2.0.js',
     'js/lib/sprintf.js',
     'js/lib/fixedsticky.js',
-    'js/lib/leaflet/leaflet.js',
+    'js/lib/leaflet/google.js',
+    'js/lib/leaflet/leaflet.markercluster-src.js',
 
 
     // Namespace
@@ -24,16 +25,22 @@ deps.JS = [
     // --------------------
     'js/View/ErrorView.js',
     'js/View/NotFoundView.js',
-    'js/View/ApplyView.js',
-    'js/View/LoginView.js',
     'js/View/MapView.js',
+    'js/View/LoginView.js',
+    'js/View/ApplyListView.js',
+    'js/View/ApplyView.js',
 
     // --------------------
     // ------  Collections ------
     // --------------------
     'js/collection/ApplyCollection.js',
+    'js/collection/ApplyGeomCollection.js',
 
-    
+    // --------------------
+    // ------  Models ------
+    // --------------------
+
+    'js/model/ApplyModel.js',
     
     // router
     'js/Router.js',

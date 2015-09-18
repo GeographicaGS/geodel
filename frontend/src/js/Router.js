@@ -6,7 +6,8 @@ App.Router = Backbone.Router.extend({
    
     /* define the route and function maps for this router */
      routes: {
-        "" : "apply",
+        "" : "applyList",
+        "apply/:id" : "apply", 
         // "home" : "home",
 
         "login" : "login",
@@ -16,8 +17,12 @@ App.Router = Backbone.Router.extend({
         "*other" : "notfound",
     },
     
-    apply: function(){
-        App.showView(new App.View.Apply());
+    applyList: function(){
+        App.showView(new App.View.ApplyList());
+    },
+
+    apply: function(id){
+        App.showView(new App.View.Apply({applyId: id}));
     },
 
     login: function(){

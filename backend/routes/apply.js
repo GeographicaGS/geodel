@@ -11,4 +11,18 @@ router.get('/get_apply_list', auth, function(req, res, next) {
 	});
 });
 
+
+router.get('/get_apply_geom', auth, function(req, res, next) {
+	ApplyModel.getApplyListGeom(function(err,data){
+		res.json({'results':data});
+	});
+});
+
+router.get('/apply/:id', auth, function(req, res, next) {
+	var id = req.params.id;
+	ApplyModel.getApplyListGeom(function(err,data){
+		res.json({'results':data});
+	});
+});
+
 module.exports = router;

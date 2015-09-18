@@ -2,31 +2,39 @@
 
 App.View.Apply = Backbone.View.extend({
     
-    _template : _.template( $('#apply-apply_list_template').html() ),
+    _template : _.template( $('#apply-apply_template').html() ),
     
-    initialize: function() {
-        this.collection = new App.Collection.Applies();
+    initialize: function(options) {
+        this.model = new App.Model.ApplyModel();
+        this.model.url = this.model.url + options.applyId
 
-        this.listenTo(this.collection,"reset",this.render);
+        this.listenTo(this.model,"request",this.render);
 
-        this.collection.fetch({"reset": true})
+        this.model.fetch({"reset": true})
         // this.render();
     },
 
     events: {
-        "click .application-search-btn" : "openSearch",
-        "click .close-search-btn" : "closeSearch",
-        
+        "click .panel-toggle" : "expandPanel",
+        "click .edit-btn" : "activateEdit",
+        "click .cancel-btn" : "cancelEdit",
+        "click .save-btn" : "save"
     },
 
-    openSearch: function(e){
-        this.$('.search-form-group').addClass('open');
-        $(e.currentTarget).addClass('hide');
+    expandPanel: function(e){
+        $(e.currentTarget).closest('.panel-item').toggleClass('expanded');
     },
-    
-    closeSearch: function(){
-        this.$('.search-form-group').removeClass('open');
-        this.$('.application-search-btn').removeClass('hide');
+
+    activateEdit: function(e){
+        $(e.currentTarget).closest('.panel-item').addClass('edit-on');   
+    },
+
+    cancelEdit: function(e){
+        $(e.currentTarget).closest('.panel-item').removeClass('edit-on');   
+    },
+
+    save: function(e){
+        $(e.currentTarget).closest('.panel-item').removeClass('edit-on');   
     },
 
     onClose: function(){
@@ -35,9 +43,7 @@ App.View.Apply = Backbone.View.extend({
     },
     
     render: function() {
-        this.$el.html(this._template({
-            applies : this.collection.toJSON()
-        }));
+        this.$el.html(this._template());
         return this;
     }
 });

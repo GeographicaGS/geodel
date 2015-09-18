@@ -5,7 +5,7 @@
 				<table class="application-table">
 					<thead class="table-header">
 						<tr>
-							<th> <span class="marker"></span> </th>
+							<!-- <th> <span class="marker"></span> </th> -->
 							<th>
 								<span class="application-search-btn">Nº Solicitud / Denominación <span class="icon-search"></span> </span>
 								<div class="search-form-group">
@@ -21,8 +21,8 @@
 					
 					<tbody>
 						<%  _.each(applies,function (apply){ %>
-							<tr class=<%=apply.estado.indexOf('ABIERTO') >=0 ? 'green':'grayed'%>>
-								<td><span class="marker"></span></td>
+							<tr class=<%= apply.estado == 'Aprobado y finalizado' ? 'green':'grayed'%>>
+								<!-- <td><span class="marker"></span></td> -->
 								<td>
 									<span class="number"><%=apply.solicitud%></span>
 									<span class="denomination"><%=apply.denominacion%></span>
