@@ -73,7 +73,12 @@ Map = {
 
 
 			if(row.coord_x && row.coord_y){
-				Map.featureApplies.addLayer(L.circleMarker([row.coord_y, row.coord_x], (row.estado == 'Aprobado y finalizado' ? styleAccept: styleNotAccept)));
+				var marker = L.circleMarker([row.coord_y, row.coord_x], (row.estado == 'Aprobado y finalizado' ? styleAccept: styleNotAccept));
+
+				marker.bindPopup('<div class="header"><span>Expediente<br></span>' + row.solicitud + ' ' + row.denominacion + '</div>' +
+                           '<div class="content"><a jslink href=apply/' + row.solicitud + '>Ver datos<br></a>', {className: 'apply_poup'});
+				
+				Map.featureApplies.addLayer(marker);
 			}
 		});
 	},

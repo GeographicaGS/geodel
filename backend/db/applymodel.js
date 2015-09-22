@@ -18,7 +18,7 @@ ApplyModel.prototype.getApplyList = function(callback){
 
 ApplyModel.prototype.getApplyListGeom = function(callback){
 	
-	BaseModel.query(callback, 'select solicitud, motivo_cierre_expediente as estado, ' +
+	BaseModel.query(callback, 'select solicitud, denominacion, motivo_cierre_expediente as estado, ' +
 								'ST_X(ST_Transform(ST_SetSRID(ST_MakePoint(coord_x, coord_y),25830),4326)) as coord_x, ' +
 								'ST_Y(ST_Transform(ST_SetSRID(ST_MakePoint(coord_x, coord_y),25830),4326)) as coord_y, ' +
 								'ST_X(ST_Centroid(ST_Transform(geom,4326))) as coord_x_m, ' +
@@ -95,6 +95,26 @@ ApplyModel.prototype.updateExecutionApply = function(applicant, callback){
 							   'SET fechalimite_inicio=to_date($1, \'dd/MM/yyyy\'), fechalimite_finalizacion=to_date($2, \'dd/MM/yyyy\'), normas_competencia=$3 '+
 							 'WHERE solicitud=$4',[applicant.fechalimite_inicio, applicant.fechalimite_finalizacion, applicant.normas_competencia, applicant.solicitud]);
 };
+
+ApplyModel.prototype.getIncidences = function(id,callback){
+
+	BaseModel.query(callback, 'select i.id, i.description, to_char(i.date, \'dd/MM/yyyy - HH24:MI\') as date, u.name, u.surname ' +
+								'from data.incidence i '+
+								'inner join data."user" u on u.email = i.email '+
+								'where i.solicitud = $1 order by i.date', [id]);
+};
+
+ApplyModel.prototype.insertIncidence = function(incidence,callback){
+
+	BaseModel.query(callback, 'INSERT INTO data.incidence(email, date, description, solicitud) VALUES ($1, CURRENT_TIMESTAMP, $2, $3)', [incidence.user,incidence.description, incidence.apply]);
+};
+
+ApplyModel.prototype.removeIncidence = function(id,callback){
+
+	BaseModel.query(callback, 'DELETE FROM data.incidence WHERE id=$1', [id]);
+};
+
+
 
 module.exports = ApplyModel;
 

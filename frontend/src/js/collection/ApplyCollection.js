@@ -6,7 +6,7 @@ App.Collection.Applies = Backbone.Collection.extend({
     },
 
     url : function() {
-        return App.config.API_URL + "/get_apply_list";
+        return App.config.API_URL + '/get_apply_list';
     },
 
     parse: function(response){

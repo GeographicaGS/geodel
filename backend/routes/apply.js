@@ -37,28 +37,51 @@ router.get('/apply/:id', auth, function(req, res, next) {
 router.post('/post_apply_basic/:id', auth, function(req, res, next) {
 	ApplyModel.updateApplicant(req.body,function(err,apply){
 		ApplyModel.updateBasicApply(req.body,function(err,apply){
-			res.json({'response':true});
+			res.json({'results':true});
 		});
 	});
 });
 
 router.post('/post_apply_intervention/:id', auth, function(req, res, next) {
 	ApplyModel.updateInterventionApply(req.body,function(err,apply){
-		res.json({'response':true});
+		res.json({'results':true});
 	});
 });
 
 router.post('/post_apply_import/:id', auth, function(req, res, next) {
 	ApplyModel.updateImportApply(req.body,function(err,apply){
-		res.json({'response':true});
+		res.json({'results':true});
 	});
 });
 
 router.post('/post_apply_execute/:id', auth, function(req, res, next) {
 	ApplyModel.updateExecutionApply(req.body,function(err,apply){
-		res.json({'response':true});
+		res.json({'results':true});
 	});
 });
+
+router.get('/get_apply_incidences/:id', auth, function(req, res, next) {
+	var id = req.params.id;
+	ApplyModel.getIncidences(id,function(err,incidences){
+		res.json({'results':incidences});
+	});
+});
+
+router.post('/post_apply_incidence', auth, function(req, res, next) {
+	ApplyModel.insertIncidence(req.body,function(err,apply){
+		res.json({'results':true});
+	});
+});
+
+router.delete('/remove_apply_incidence/:id', auth, function(req, res, next) {
+	var id = req.params.id;
+	ApplyModel.removeIncidence(id,function(err,apply){
+		res.json({'results':true});
+	});
+});
+
+
+
 
 module.exports = router;
 

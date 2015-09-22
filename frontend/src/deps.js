@@ -34,18 +34,21 @@ deps.JS = [
     'js/View/ApplyInterventionView.js',
     'js/View/ApplyImportView.js',
     'js/View/ApplyExecutionView.js',
+    'js/View/ApplyIncidenceView.js',
+
+
+    // --------------------
+    // ------  Models ------
+    // --------------------
+    'js/model/ApplyModel.js',
+    'js/model/ApplyIncidenceModel.js',
 
     // --------------------
     // ------  Collections ------
     // --------------------
     'js/collection/ApplyCollection.js',
     'js/collection/ApplyGeomCollection.js',
-
-    // --------------------
-    // ------  Models ------
-    // --------------------
-
-    'js/model/ApplyModel.js',
+    'js/collection/ApplyIncidenceCollection.js',
     
     // router
     'js/Router.js',

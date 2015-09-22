@@ -39,27 +39,29 @@ App.View.Apply = Backbone.View.extend({
 
     onClose: function(){
         // Remove events on close
-        this.basicInformation.close();
-        this.intervention.close();
+        this.basicInformationView.close();
+        this.interventionView.close();
         this.importView.close();
-        this.execution.close();
+        this.executionView.close();
         this.stopListening();
     },
     
     render: function() {
-        this.basicInformation = new App.View.ApplyBasicInformation({model: this.model, superView:this});
-        this.intervention = new App.View.ApplyIntervention({model: this.model, superView:this });
+        this.basicInformationView = new App.View.ApplyBasicInformation({model: this.model, superView:this});
+        this.interventionView = new App.View.ApplyIntervention({model: this.model, superView:this });
         this.importView = new App.View.ApplyImport({model: this.model, superView:this });
-        this.execution = new App.View.ApplyExecution({model: this.model, superView:this });
+        this.executionView = new App.View.ApplyExecution({model: this.model, superView:this });
+        this.incidenceView = new App.View.ApplyIncidence({id_apply: this.model.get('solicitud')});
         
         this.$el.html(this._template({
             apply : this.model.toJSON()
         }));
 
-        this.$('#basic_information').append(this.basicInformation.el);
-        this.$('#intervention').append(this.intervention.el);
+        this.$('#basic_information').append(this.basicInformationView.el);
+        this.$('#intervention').append(this.interventionView.el);
         this.$('#import').append(this.importView.el);
-        this.$('#execution').append(this.execution.el);
+        this.$('#execution').append(this.executionView.el);
+        this.$('#apply_incidences').append(this.incidenceView.el);
 
         return this;
     },

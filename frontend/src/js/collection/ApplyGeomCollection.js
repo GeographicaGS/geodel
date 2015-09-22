@@ -6,7 +6,7 @@ App.Collection.AppliesGeomList = Backbone.Collection.extend({
     },
 
     url : function() {
-        return App.config.API_URL + "/get_apply_geom";
+        return App.config.API_URL + '/get_apply_geom';
     },
 
     parse: function(response){
