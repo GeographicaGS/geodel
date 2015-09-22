@@ -20,9 +20,46 @@ router.get('/get_apply_geom', auth, function(req, res, next) {
 
 router.get('/apply/:id', auth, function(req, res, next) {
 	var id = req.params.id;
-	ApplyModel.getApplyListGeom(function(err,data){
-		res.json({'results':data});
+	ApplyModel.getApply(id,function(err,apply){
+		ApplyModel.getSectors(function(err,sectors){
+			ApplyModel.getIntervetionsTypes(function(err,intervetions){
+				ApplyModel.getIntervetionGroup(function(err,intervetionsGroups){
+					apply[0].sectors = sectors;
+					apply[0].intervetions = intervetions;
+					apply[0].intervetionsGroups = intervetionsGroups;
+					res.json(apply[0]);
+				});
+			});
+		});
+	});
+});
+
+router.post('/post_apply_basic/:id', auth, function(req, res, next) {
+	ApplyModel.updateApplicant(req.body,function(err,apply){
+		ApplyModel.updateBasicApply(req.body,function(err,apply){
+			res.json({'response':true});
+		});
+	});
+});
+
+router.post('/post_apply_intervention/:id', auth, function(req, res, next) {
+	ApplyModel.updateInterventionApply(req.body,function(err,apply){
+		res.json({'response':true});
+	});
+});
+
+router.post('/post_apply_import/:id', auth, function(req, res, next) {
+	ApplyModel.updateImportApply(req.body,function(err,apply){
+		res.json({'response':true});
+	});
+});
+
+router.post('/post_apply_execute/:id', auth, function(req, res, next) {
+	ApplyModel.updateExecutionApply(req.body,function(err,apply){
+		res.json({'response':true});
 	});
 });
 
 module.exports = router;
+
+

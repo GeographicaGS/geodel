@@ -32,7 +32,7 @@ Map = {
 			// var ggl = new L.Google('SATELLITE');
 			var ggl = new L.Google('HYBRID');
 			this.__map.addLayer(ggl);
-			this.featureApplies = L.markerClusterGroup({spiderfyOnMaxZoom: false, showCoverageOnHover: false,
+			this.featureApplies = L.markerClusterGroup({spiderfyOnMaxZoom: true, showCoverageOnHover: false,
 				iconCreateFunction: function(cluster) {
 					var markers = cluster.getAllChildMarkers();
 					var n = 0;
@@ -46,6 +46,7 @@ Map = {
 	},
 
 	drawApplies:function(rows){
+		this.featureApplies.clearLayers()
 		$(rows).each(function(index, row) {
 			if(!row.coord_x || !row.coord_y){
 				row.coord_x = row.coord_x_m;

@@ -16,8 +16,8 @@ App.View.ApplyList = Backbone.View.extend({
     events: {
         "click .application-search-btn" : "openSearch",
         "click .close-search-btn" : "closeSearch",
-        "keyup .search-input" : "searchApply"
-        
+        "keyup .search-input" : "searchApply",
+        "click .application-table tbody tr" : "showApply"
     },
 
     openSearch: function(e){
@@ -48,6 +48,22 @@ App.View.ApplyList = Backbone.View.extend({
                 }
             }
         });
+    },
+
+    showApply:function(e){
+        var id = $(e.currentTarget).attr('apply');
+        App.router.navigate('apply/' + id ,{trigger: true});
+        var model = this.collection.findWhere({solicitud: id});
+        var x = model.get('coord_x');
+        var y = model.get('coord_y');
+        var mx = model.get('coord_x_m');
+        var my = model.get('coord_y_m');
+        if(!x || !y){
+            x = mx;
+            y = my;
+        }
+        Map.getMap().setView([y,x],18);
+
     },
 
     onClose: function(){

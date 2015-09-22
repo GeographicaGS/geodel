@@ -155,7 +155,7 @@ App.loginComplete = function(){
     App.resizeMe();
     $('.masthead').removeClass('hide');
     $('.login-txt').text(App.user.name + ' ' + App.user.surname);
-    new App.View.Map();
+    this.mapView = new App.View.Map();
 };
 
 App.setAjaxSetup = function(){

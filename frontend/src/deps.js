@@ -4,6 +4,7 @@ deps.templateFolder = 'js/template';
 
 deps.JS = [
     'js/lib/jquery-2.1.4.js',
+    'js/lib/jquery-ui.js',
     'js/lib/underscore-1.8.3.js',
     'js/lib/mustache.min.js',
     'js/lib/backbone-1.2.0.js',
@@ -29,6 +30,10 @@ deps.JS = [
     'js/View/LoginView.js',
     'js/View/ApplyListView.js',
     'js/View/ApplyView.js',
+    'js/View/ApplyBasicInformationView.js',
+    'js/View/ApplyInterventionView.js',
+    'js/View/ApplyImportView.js',
+    'js/View/ApplyExecutionView.js',
 
     // --------------------
     // ------  Collections ------

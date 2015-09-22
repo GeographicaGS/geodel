@@ -9,9 +9,13 @@ App.View.Map = Backbone.View.extend({
 
         this.listenTo(this.collection,"reset",this.render);
 
-        this.collection.fetch({"reset": true})
+        this.resetAppliesGeoms();
         // Map.drawApplies();
     	// this.render();
+    },
+
+    resetAppliesGeoms:function(){
+        this.collection.fetch({"reset": true})
     },
     
     onClose: function(){

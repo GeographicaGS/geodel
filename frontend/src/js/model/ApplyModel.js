@@ -8,7 +8,7 @@ App.Model.ApplyModel = Backbone.Model.extend({
     },
 
     // parse: function(response){
-    //     return response.results[0];
+    //     return response;
     // }
 
     
