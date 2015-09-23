@@ -35,13 +35,15 @@ deps.JS = [
     'js/View/ApplyImportView.js',
     'js/View/ApplyExecutionView.js',
     'js/View/ApplyIncidenceView.js',
-
+    'js/View/IndicatorListView.js',
+    'js/View/IndicatorView.js',
 
     // --------------------
     // ------  Models ------
     // --------------------
     'js/model/ApplyModel.js',
     'js/model/ApplyIncidenceModel.js',
+    'js/model/IndicatorModel.js',
 
     // --------------------
     // ------  Collections ------
@@ -49,6 +51,7 @@ deps.JS = [
     'js/collection/ApplyCollection.js',
     'js/collection/ApplyGeomCollection.js',
     'js/collection/ApplyIncidenceCollection.js',
+    'js/collection/IndicatorCollection.js',
     
     // router
     'js/Router.js',

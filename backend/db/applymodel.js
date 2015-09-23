@@ -6,13 +6,15 @@ function ApplyModel() {
 }
 
 ApplyModel.prototype.getApplyList = function(callback){
-	BaseModel.query(callback, 'select m.descripcion as town, solicitud,denominacion, motivo_cierre_expediente as estado, i.nombre as medida, ' +
+	BaseModel.query(callback, 'select m.descripcion as town, solicitud,denominacion, motivo_cierre_expediente as estado, med.nombre as medida, ' +
 								'ST_X(ST_Transform(ST_SetSRID(ST_MakePoint(coord_x, coord_y),25830),4326)) as coord_x, ' +
 								'ST_Y(ST_Transform(ST_SetSRID(ST_MakePoint(coord_x, coord_y),25830),4326)) as coord_y, ' +
 								'ST_X(ST_Centroid(ST_Transform(geom,4326))) as coord_x_m, ' +
 								'ST_Y(ST_Centroid(ST_Transform(geom,4326))) as coord_y_m ' +
 								'from data.expedientes e '+
-								'left join data.municipios m on e.municipio = m.id left join data.grupo_intervencion i on i.gi=e.gi ' +
+								'left join data.municipios m on e.municipio = m.id ' +
+								'left join data.grupo_intervencion i on i.gi=e.gi ' +
+								'left join data.medidas med on i.medida=med.id ' +
 								'order by denominacion');
 };
 

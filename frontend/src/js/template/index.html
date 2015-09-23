@@ -18,6 +18,11 @@
     <link rel='stylesheet' href='/css/styles.min.css'>
 
     <script type="text/javascript" src="/js/leaflet.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    
+    <script type="text/javascript">
+        google.load("visualization", "1", {packages:["corechart"]});
+    </script>
               
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -32,9 +37,14 @@
             <nav>
                 <ul class="main-nav">
                     <ul>
-                        <a href="#" jslink><li class="active"><span>Expedientes</span> </li></a>
-                        <li> <span>Indicadores</span></li>
-                        <li><span>Administración</span><span class="addto-btn"></span></li>
+                        <a class="menu" href="#" jslink>
+                            <li menu="1" class="active"><span>Expedientes</span> </li></a>
+                        <a class="menu" href="indicators" jslink>
+                            <li menu="2"> <span>Indicadores</span></li>
+                        </a>
+                        <li>
+                            <span>Administración</span><span class="addto-btn"></span>
+                        </li>
                     </ul>
                 </ul>
             </nav>

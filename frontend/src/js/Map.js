@@ -2,11 +2,13 @@ Map = {
 	
 	layers: [],
 	markers: {},
-	iniLat: 37.36455,
-	iniLng: -3.57645,	
-	iniZoom: 6,
+	iniLat: 37.08640561029597,
+	iniLng: -5.3276824951171875,	
+	iniZoom: 10,
 	__map:null,
 	featureApplies: null,
+	featureIndicators: null,
+	maxIndicatorRadius: 100,
 	
 	initialize: function(){
 		$("#map").outerHeight($("#map").outerHeight()-$("footer").outerHeight());
@@ -42,11 +44,18 @@ Map = {
 					return L.divIcon({ html: n, className: 'mycluster', iconSize: L.point(40, 40) });
 				}
 			});
-			this.featureApplies.addTo(this.__map);
+			this.featureIndicators = L.featureGroup();
+
+			var activeMenu = $('.main-nav li.active').attr('menu')
+			if(activeMenu == 1){
+				this.featureApplies.addTo(this.__map);
+			}else if(activeMenu == 2){
+				this.featureIndicators.addTo(this.__map);
+			}
 	},
 
 	drawApplies:function(rows){
-		this.featureApplies.clearLayers()
+		this.featureApplies.clearLayers();
 		$(rows).each(function(index, row) {
 			if(!row.coord_x || !row.coord_y){
 				row.coord_x = row.coord_x_m;
@@ -76,9 +85,49 @@ Map = {
 				var marker = L.circleMarker([row.coord_y, row.coord_x], (row.estado == 'Aprobado y finalizado' ? styleAccept: styleNotAccept));
 
 				marker.bindPopup('<div class="header"><span>Expediente<br></span>' + row.solicitud + ' ' + row.denominacion + '</div>' +
-                           '<div class="content"><a jslink href=apply/' + row.solicitud + '>Ver datos<br></a>', {className: 'apply_poup'});
+                           '<div class="content"><a jslink href=apply/' + row.solicitud + '>Ver datos<br></a></div>', {className: 'apply_poup'});
 				
 				Map.featureApplies.addLayer(marker);
+			}
+		});
+	},
+
+	drawIndicators:function(data,keyValue,title){
+		this.getMap().setView([this.iniLat,this.iniLng],this.iniZoom);
+		this.featureIndicators.clearLayers();
+		var _this = this;
+		var maxValue = 1;
+		var style = 	{
+								// radius: 10,
+								fillColor: "#b13330",
+								color: "#b13330",
+								weight: 1,
+								opacity: 1,
+								fillOpacity: 0.8
+							};
+		$.each(data, function(){
+			var value = parseFloat(this[keyValue]);
+			if(value > maxValue){
+				maxValue = value;
+			}
+		});
+
+		$.each(data, function(){
+			var name = title;
+			if(this['#0#y'] && this['#0#x']){
+				
+				$.each(this, function(key, value){
+					if(key!='#0#y' && key!='#0#x' && key!=keyValue){
+						name = title + ' - ' + value;
+					}
+				});
+				
+				style.radius = (this[keyValue] * _this.maxIndicatorRadius)/maxValue;
+				var marker = L.circleMarker([this['#0#y'], this['#0#x']], style);
+
+				marker.bindPopup('<div class="content">' + name + ': ' + this[keyValue] + '</div>', {className: 'apply_poup'});
+
+				_this.featureIndicators.addLayer(marker);
 			}
 		});
 	},

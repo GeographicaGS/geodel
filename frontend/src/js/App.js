@@ -19,18 +19,22 @@ App.events = {};
 
 _.extend(App.events , Backbone.Events);
 
-App.events.on('context:change',function(ctxData){
-    if (ctxData.type == App.Cons.TYPE_TWEETS){
-        $('.info-panel').hide();
+App.events.on("menu", function(id){
+    if(Map.getMap()){
+        if(id==1){
+            Map.getMap().removeLayer(Map.featureIndicators);
+            Map.featureApplies.addTo(Map.getMap());
+        }else if(id==2){
+            Map.getMap().removeLayer(Map.featureApplies);
+            Map.featureIndicators.addTo(Map.getMap());
+        }
     }
-    else{
-        $('.info-panel').show();   
-    }
+    $('.menu li').removeClass('active');
+    $('.menu li[menu="' + id + '"]').addClass('active');
 });
 
 
 $(function() {
-    
     $(document).ajaxError(function(event, jqxhr) {
         if (jqxhr.status == 404) {
             App.router.navigate('notfound',{trigger: true});

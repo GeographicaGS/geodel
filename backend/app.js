@@ -23,6 +23,7 @@ db.init(function(err){
     var routes = require('./routes/index');
     var index = require('./routes/index');
     var apply = require('./routes/apply');
+    var indicator = require('./routes/indicator');
     var url = require('url');
 
     // view engine setup
@@ -57,6 +58,7 @@ db.init(function(err){
     app.use('/', routes);
     app.use('/', index);
     app.use('/', apply);
+    app.use('/', indicator);
 
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {

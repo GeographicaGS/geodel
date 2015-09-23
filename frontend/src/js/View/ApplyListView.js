@@ -5,6 +5,8 @@ App.View.ApplyList = Backbone.View.extend({
     _template : _.template( $('#apply-apply_list_template').html() ),
     
     initialize: function() {
+        App.events.trigger("menu", 1);
+
         this.collection = new App.Collection.Applies();
 
         this.listenTo(this.collection,"reset",this.render);

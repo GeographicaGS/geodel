@@ -5,6 +5,7 @@ App.View.Apply = Backbone.View.extend({
     _template : _.template( $('#apply-apply_template').html() ),
     
     initialize: function(options) {
+        App.events.trigger("menu", 1);
         this.model = new App.Model.ApplyModel();
         this.model.url = this.model.url + options.applyId
 
@@ -71,7 +72,7 @@ App.View.Apply = Backbone.View.extend({
     },
 
     refreshImports:function(){
-        this.$('#plannedInvestment').text(App.formatNumber(this.model.get('inversion_prevista')));
-        this.$('#subventionGrant').text(App.formatNumber(this.model.get('subvencion_concedida')));
+        this.$('#plannedInvestment').text(App.formatNumber(this.model.get('inversion_prevista')) + ' ' + '€');
+        this.$('#subventionGrant').text(App.formatNumber(this.model.get('subvencion_concedida')) + ' ' + '€');
     }
 });
