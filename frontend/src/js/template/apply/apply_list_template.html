@@ -22,12 +22,12 @@
 					<tbody>
 						<%  _.each(applies,function (apply){ %>
 							<tr apply="<%=apply.solicitud%>"  class=<%= apply.estado == 'Aprobado y finalizado' ? 'green':'grayed'%>>
-								<td>
+								<td title="<%=apply.denominacion%>">
 									<span class="number"><%=apply.solicitud%></span>
 									<span class="denomination"><%=apply.denominacion%></span>
 								</td>
 								<td><span class="town"><%=apply.town%></span></td>
-								<td><span class="date"><%=apply.medida%></span></td>	
+								<td title="<%=apply.medida%>"><span class="date"><%=apply.medida%></span></td>	
 							</tr>
 						<% }); %>
 						
