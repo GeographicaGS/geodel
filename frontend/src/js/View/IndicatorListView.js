@@ -7,6 +7,7 @@ App.View.IndicatorList = Backbone.View.extend({
     initialize: function() {
         App.events.trigger("menu", 2);
         if(Map.featureIndicators){
+            Map.getMap().setView([Map.iniLat,Map.iniLng],Map.iniZoom);
             Map.featureIndicators.clearLayers();
         }
         this.collection = new App.Collection.Indicators();

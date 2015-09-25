@@ -69,32 +69,32 @@ App.View.Indicator = Backbone.View.extend({
          'width':$(".indicadores-body").outerWidth() - 43,
          'height':$(".indicadores-body").outerHeight(),
           bars: 'horizontal',
-          chartArea: { 
-            width: "100%",
-            left:'3'
-          },
-          // bar: { groupWidth: "20%" },
+          // chartArea: { 
+          //   width: "100%",
+          //   left:'3'
+          // },
+          // bar: { groupWidth: "90%" },
           legend: { position: "none" },
        //    animation:{
           //   duration: 1000,
           //   easing: 'out',
           // },
-          // vAxis:{
-          //   textStyle:{
-          //       fontSize:12,
-          //       color:'#5d5b5c',
-          //   }
-          // },
+          vAxis:{
+            textStyle:{
+                fontSize:12,
+                color:'#5d5b5c',
+            }
+          },
 
-          // hAxis:{
-          //   textStyle:{
-          //       fontSize:14,
-          //       color:'#5d5b5c'
-          //   },
-          //   viewWindow:{
-          //       min:0
-          //   }
-          // },
+          hAxis:{
+            textStyle:{
+                fontSize:14,
+                color:'#5d5b5c'
+            },
+            viewWindow:{
+                min:0
+            }
+          },
           colors:['#bd5755'],
           tooltip: {isHtml: true}
 
@@ -123,5 +123,6 @@ App.View.Indicator = Backbone.View.extend({
 
         var chart = new google.visualization.BarChart(document.getElementById('tab_grafica'));
         chart.draw(data, options);
+        this.$('#tab_grafica').addClass('hide');
     }
 });

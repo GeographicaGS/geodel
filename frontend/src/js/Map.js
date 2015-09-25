@@ -127,6 +127,13 @@ Map = {
 
 				marker.bindPopup('<div class="content">' + name + ': ' + this[keyValue] + '</div>', {className: 'apply_poup'});
 
+				marker.on('mouseover', function (e) {
+		            this.openPopup();
+		        });
+		        marker.on('mouseout', function (e) {
+		            this.closePopup();
+		        });
+
 				_this.featureIndicators.addLayer(marker);
 			}
 		});

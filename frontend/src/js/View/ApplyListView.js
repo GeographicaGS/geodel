@@ -7,6 +7,10 @@ App.View.ApplyList = Backbone.View.extend({
     initialize: function() {
         App.events.trigger("menu", 1);
 
+        if(Map.featureIndicators){
+            Map.getMap().setView([Map.iniLat,Map.iniLng],Map.iniZoom);
+        }
+
         this.collection = new App.Collection.Applies();
 
         this.listenTo(this.collection,"reset",this.render);
