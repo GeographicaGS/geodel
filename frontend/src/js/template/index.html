@@ -44,24 +44,39 @@
 
     <header class="masthead hide">
         <h1><a href="/" class="logo">Serranía Suroeste Sevillana, Grupo de Desarrollo Rural</a></h1>
+        <div id="plan_header"></div>
             <nav>
                 <ul class="main-nav">
                     <ul>
-                        <a class="menu" href="#" jslink>
-                            <li menu="1" class="active"><span>Expedientes</span> </li></a>
-                        <a class="menu" href="indicators" jslink>
+                       
+                        <li menu="1" class="active">
+                             <a class="menu" href="applies" jslink program>
+                                <span>Expedientes</span>
+                            </a>
+                            <a href="new_apply" jslink program>
+                                <span class="addto-btn"></span>
+                            </a>
+                        </li>
+                        
+                        <a class="menu" href="indicators" jslink program>
                             <li menu="2"> <span>Indicadores</span></li>
                         </a>
-                        <li>
-                            <span>Administración</span><span class="addto-btn"></span>
-                        </li>
+                        
+                            <li menu="3" class="hide">
+                                <a href="admin" jslink program>
+                                    <span>Administración</span>
+                                </a>
+                                <a href="new_user" jslink program>
+                                    <span class="addto-btn"></span>
+                                </a>
+                            </li>
                     </ul>
                 </ul>
             </nav>
             <div class="login-container">
                 <span class="login-txt">username</span>
-                <span class="btn-login"></span>
-            </a><!-- login-container -->
+                <span class="btn-login" onclick="javascript:App.logout();"></span>
+            </div>
     </header>
     
     <main></main>

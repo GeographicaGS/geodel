@@ -33,7 +33,7 @@ App.View.ApplyIncidence = Backbone.View.extend({
     	var _this = this;
     	var incidence = this.collection.findWhere({id:parseInt($(e.currentTarget).attr('incidence'))});
     	incidence.url = App.config.API_URL + '/remove_apply_incidence/' + incidence.get('id');
-    	var c = confirm("Press a button");
+    	var c = confirm("¿Está seguro de que desea borrar esta incidencia?");
     	if(c){
     		incidence.destroy({
     			success:function(){

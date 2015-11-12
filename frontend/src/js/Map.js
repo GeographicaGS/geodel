@@ -30,9 +30,9 @@ Map = {
 			// L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 			//     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 			// }).addTo(this.__map);
-			// var ggl = new L.Google('ROADMAP');
+			var ggl = new L.Google('ROADMAP');
 			// var ggl = new L.Google('SATELLITE');
-			var ggl = new L.Google('HYBRID');
+			// var ggl = new L.Google('HYBRID');
 			this.__map.addLayer(ggl);
 			this.featureApplies = L.markerClusterGroup({spiderfyOnMaxZoom: true, showCoverageOnHover: false,
 				iconCreateFunction: function(cluster) {
@@ -80,12 +80,25 @@ Map = {
 										fillOpacity: 1
 									};
 
+			var stylePending = 	{
+										radius: 10,
+										fillColor: "#018be2",
+										color: "#ffffff",
+										weight: 1,
+										opacity: 0.8,
+										fillOpacity: 1
+									};
+
 
 			if(row.coord_x && row.coord_y){
-				var marker = L.circleMarker([row.coord_y, row.coord_x], (row.estado == 'Aprobado y finalizado' ? styleAccept: styleNotAccept));
+				var marker = L.circleMarker([row.coord_y, row.coord_x], (row.estado == 'Aprobado y finalizado' ? styleAccept: (row.estado == 'Pendiente' ? stylePending:styleNotAccept)));
 
 				marker.bindPopup('<div class="header"><span>Expediente<br></span>' + row.solicitud + ' ' + row.denominacion + '</div>' +
-                           '<div class="content"><a jslink href=apply/' + row.solicitud + '>Ver datos<br></a></div>', {className: 'apply_poup'});
+                           '<div class="content"><a jslink href=program/' + App.programView.current + '/apply/' + row.id + '>Ver datos<br></a></div>', {className: 'apply_poup'});
+
+				marker.on('mouseover', function (e) {
+		            this.openPopup();
+		        });
 				
 				Map.featureApplies.addLayer(marker);
 			}
@@ -130,9 +143,9 @@ Map = {
 				marker.on('mouseover', function (e) {
 		            this.openPopup();
 		        });
-		        marker.on('mouseout', function (e) {
-		            this.closePopup();
-		        });
+		        // marker.on('mouseout', function (e) {
+		        //     this.closePopup();
+		        // });
 
 				_this.featureIndicators.addLayer(marker);
 			}

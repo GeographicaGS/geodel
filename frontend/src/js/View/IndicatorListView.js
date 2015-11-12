@@ -4,13 +4,15 @@ App.View.IndicatorList = Backbone.View.extend({
     
     _template : _.template( $('#indicator-indicator_list_template').html() ),
     
-    initialize: function() {
+    initialize: function(options) {
         App.events.trigger("menu", 2);
         if(Map.featureIndicators){
             Map.getMap().setView([Map.iniLat,Map.iniLng],Map.iniZoom);
             Map.featureIndicators.clearLayers();
         }
         this.collection = new App.Collection.Indicators();
+
+        this.collection.url = this.collection.url + options.program
 
         this.listenTo(this.collection,"reset",this.render);
 
@@ -38,7 +40,7 @@ App.View.IndicatorList = Backbone.View.extend({
 
     showIndicator:function(e){
         var id = $(e.currentTarget).attr('id');
-        App.router.navigate('indicator/' + id ,{trigger: true});
+        App.router.navigate('program/' + App.programView.current + '/indicator/' + id ,{trigger: true});
     },
 
     onClose: function(){

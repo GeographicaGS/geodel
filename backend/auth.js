@@ -58,4 +58,21 @@ function authenticate(req, res, next) {
 	
 }
 
+function isAdmin(req, res, next) {
+  authenticate(req, res, function(){
+    if(req.user.profile == "Administrador"){
+      next();
+        
+    }else{
+      res.status(401)
+      res.json({
+          "messsage" : "Bad credentials"
+      });
+      return;
+    }
+    
+  });
+}
+
 module.exports.authenticate = authenticate;
+module.exports.isAdmin = isAdmin;

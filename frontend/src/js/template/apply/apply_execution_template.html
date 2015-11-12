@@ -1,8 +1,10 @@
 <div class="panel-header">
 	<h3 class="panel-toggle">Ejecución</h3>
-	<span class="edit-btn">Editar</span>
-	<span class="cancel-btn">Cancelar</span>
-	<span class="save-btn">Guardar</span>
+	<%if(App.user.profile == "Administrador"){%>
+		<span class="edit-btn">Editar</span>
+		<span class="cancel-btn">Cancelar</span>
+		<span class="save-btn">Guardar</span>
+	<%}%>
 </div><!-- panel-header -->
 <div class="panel-body">
 	<form action="" class="application-form ">

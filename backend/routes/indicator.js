@@ -5,8 +5,9 @@ var auth = require('../auth.js').authenticate;
 var db = require('../db/db.js');
 var IndicatorModel = db.IndicatorModel;
 
-router.get('/get_indicator_list', auth, function(req, res, next) {
-	IndicatorModel.getIndicatorList(function(err,data){
+router.get('/get_indicator_list/:id_program', auth, function(req, res, next) {
+	var id_program = req.params.id_program;
+	IndicatorModel.getIndicatorList(id_program, function(err,data){
 		res.json({'results':data});
 	});
 });

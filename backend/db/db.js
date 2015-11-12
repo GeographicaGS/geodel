@@ -3,6 +3,7 @@ function init(callback){
     module.exports.UserModel = new (require('./usermodel.js'));
     module.exports.ApplyModel = new (require('./applymodel.js'));
     module.exports.IndicatorModel = new (require('./indicatormodel.js'));
+    module.exports.ProgramModel = new (require('./programmodel.js'));
     callback();
 }
 

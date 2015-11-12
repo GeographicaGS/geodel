@@ -5,10 +5,10 @@ function IndicatorModel() {
 
 }
 
-IndicatorModel.prototype.getIndicatorList = function(callback){
+IndicatorModel.prototype.getIndicatorList = function(id_program, callback){
 	BaseModel.query(callback, 'select id, nombre ' +
-								'from data.indicadores '+
-								'order by id');
+								'from data.indicadores WHERE id_program = $1'+
+								'order by id', [id_program]);
 };
 
 IndicatorModel.prototype.getIndicator = function(id,callback){

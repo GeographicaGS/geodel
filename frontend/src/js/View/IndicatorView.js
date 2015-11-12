@@ -56,6 +56,7 @@ App.View.Indicator = Backbone.View.extend({
         }));
 
         Map.drawIndicators(this.model.get('data'), keyValue, this.model.get('nombre'));
+        
         this._drawChart(keyValue);
 
         return this;

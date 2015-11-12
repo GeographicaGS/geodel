@@ -21,7 +21,7 @@
 					
 					<tbody>
 						<%  _.each(applies,function (apply){ %>
-							<tr apply="<%=apply.solicitud%>"  class=<%= apply.estado == 'Aprobado y finalizado' ? 'green':'grayed'%>>
+							<tr apply="<%=apply.id%>"  class=<%= apply.estado == 'Aprobado y finalizado' ? 'green': (apply.estado == 'Pendiente' ? 'blue' : 'grayed') %>>
 								<td title="<%=apply.denominacion%>">
 									<span class="number"><%=apply.solicitud%></span>
 									<span class="denomination"><%=apply.denominacion%></span>

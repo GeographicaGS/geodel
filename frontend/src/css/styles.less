@@ -400,6 +400,15 @@ table {
                 }
             }
         }
+        &.blue{
+            td{
+                &:nth-child(1) {
+                    &:before{
+                        background-color: #018be2;
+                    }
+                }
+            }
+        }
     }
     th,
     td {
@@ -435,6 +444,13 @@ table {
     display: none;
     background: @white;
     padding: 2px 5px 1px;
+
+    &.show{
+        display: block;
+        padding: 0;
+        background: initial;
+    }
+
     .list-container & {
         display: block;
         background: @g10;
@@ -571,6 +587,19 @@ table {
         border-radius: 2px;
         margin-left: 18px;
         cursor: pointer;
+       
+        &.state{
+            width: 250px;
+            text-align: center;
+            &.blue{
+                background: #018be2;
+            }
+
+            &.grayed{
+                background: #909599
+            }
+        }
+
         &:hover {
             background: lighten(@green, 3%);
             .close-options {
@@ -601,10 +630,12 @@ table {
             .shadow-btm(4px,
             fade(@black, 25%));
             li {
+                text-align: left;
+                line-height: 22px;
                 color: @g40;
                 border-bottom: 1px solid @g20;
                 cursor: pointer;
-                padding: 0 10px;
+                padding: 4px 10px;
                 &:last-child {
                     border-bottom: 0 none;
                     border-radius: 0 0 2px 2px;
@@ -621,6 +652,14 @@ table {
                         background: @blue-sky;
                     }
                 }
+
+                &.executed-approve {
+                    color: #096;
+                    &:before {
+                        background: #096;
+                    }
+                }
+
                 &:hover {
                     background: @g20;
                 }
@@ -666,12 +705,29 @@ table {
             background: @green;
             margin-right: 20px;
             margin-left: -30px;
+
+            &.blue{
+                background: #018be2;
+            }
+
+            &.grayed{
+                background: #909599
+            }
         }
         .app-number {
             display: block;
             .font-size(1.4);
             font-weight: 700;
             color: @green;
+
+            &.blue{
+                color: #018be2;
+            }
+
+            &.grayed{
+                color: #909599
+            }
+
             em {
                 font-style: italic;
             }
@@ -691,6 +747,15 @@ table {
         line-height: 1;
         color: @green;
         font-style: italic;
+
+        &.blue{
+            color: #018be2;
+        }
+
+        &.grayed{
+            color: #909599
+        }
+
     }
     .location-name {
         display: block;
@@ -1180,7 +1245,7 @@ table {
     .corY {
         padding-left: 20px;
     }
-    .getfrommap-btn {
+    .getfrommap-btn, .new-getfrommap-btn {
         color: @g40 !important;
         margin-left: auto; //make flex item align on right
         .font-size(1.2);
@@ -1449,6 +1514,10 @@ table {
         .form-group {
             span {
                 display: none;
+
+                &.show{
+                    display: inline-block;
+                }
             }
             .label {
                 display: flex;
@@ -1609,6 +1678,33 @@ table {
 /******  End of Lightbox  *******/
 
 
+#plan_header{
+    z-index: 1001;
+    position: absolute;
+    left: 226px;
+    right: 0;
+    font-size: 11px;
+    background-color: #ad2623;
+    text-align: left;
+    padding: 2px 30px;
+    cursor: pointer;
+
+
+
+    ul{
+        position: absolute;
+        background-color: #2b3033;
+        z-index: 1001;
+        top: 20px;
+        // width: 100%;
+        line-height: 22px;
+
+        li{
+            border-bottom: 1px solid #e9eaea;
+        }
+    }
+}
+
 
 /*********************************************
 *            Fixed Sticky js plugin css            *
@@ -1709,7 +1805,7 @@ ul{
 }
 
 .leaflet-popup{
-    pointer-events: none;
+    // pointer-events: none;
     &.apply_poup{
         .leaflet-popup-content-wrapper{
             .leaflet-popup-content{
@@ -1780,6 +1876,12 @@ div.google-visualization-tooltip{
                 }
             }
         }
+    }
+}
+
+input{
+    &.error{
+        border: 1px solid red;
     }
 }
 

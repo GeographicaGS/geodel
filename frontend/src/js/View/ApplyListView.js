@@ -4,7 +4,7 @@ App.View.ApplyList = Backbone.View.extend({
     
     _template : _.template( $('#apply-apply_list_template').html() ),
     
-    initialize: function() {
+    initialize: function(options) {
         App.events.trigger("menu", 1);
 
         if(Map.featureIndicators){
@@ -12,6 +12,8 @@ App.View.ApplyList = Backbone.View.extend({
         }
 
         this.collection = new App.Collection.Applies();
+
+        this.collection.url = this.collection.url + options.program
 
         this.listenTo(this.collection,"reset",this.render);
 
@@ -58,8 +60,8 @@ App.View.ApplyList = Backbone.View.extend({
 
     showApply:function(e){
         var id = $(e.currentTarget).attr('apply');
-        App.router.navigate('apply/' + id ,{trigger: true});
-        var model = this.collection.findWhere({solicitud: id});
+        App.router.navigate('program/' + App.programView.current + '/apply/' + id ,{trigger: true});
+        var model = this.collection.findWhere({id: parseInt(id)});
         var x = model.get('coord_x');
         var y = model.get('coord_y');
         var mx = model.get('coord_x_m');

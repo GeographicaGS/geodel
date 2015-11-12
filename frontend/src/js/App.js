@@ -29,8 +29,17 @@ App.events.on("menu", function(id){
             Map.featureIndicators.addTo(Map.getMap());
         }
     }
-    $('.menu li').removeClass('active');
-    $('.menu li[menu="' + id + '"]').addClass('active');
+
+    if(id==3){
+        // $("#map").hide();
+    }else{
+        // $("#map").show();
+    }
+
+    // $('.menu li').removeClass('active');
+    // $('.menu li[menu="' + id + '"]').addClass('active');
+    $('li[menu]').removeClass('active');
+    $('li[menu="' + id + '"]').addClass('active');
 });
 
 
@@ -46,14 +55,20 @@ $(function() {
 
     $('body').on('click','a',function(e){
         var attr = $(this).attr('jslink'),
-            href = $(this).attr('href');
+            href = $(this).attr('href'),
+            programUrl = '';
 
         if (attr!= undefined && attr!='undefined'){
             e.preventDefault();
             if (href=='#back') {
                 history.back();
             }
-            App.router.navigate($(this).attr('href'),{trigger: true});
+            
+            if($(this).attr("program") != undefined && $(this).attr("program") !='undefined'){
+                programUrl = 'program/' + App.programView.current + '/';
+            }
+
+            App.router.navigate(programUrl + $(this).attr('href'),{trigger: true});
         }
     });
 
@@ -90,6 +105,8 @@ App.ini = function(){
     this.router = new App.Router({ });
 
     this.$main = $('main');
+
+    this.$programs = $('#plan_header');
 
     // Backbone.history.start({pushState: true});
 
@@ -131,6 +148,15 @@ App.doLogin = function(user){
             App.user = usercomplete;
             App.user["password"] = user["password"];
             localStorage.setItem("user",JSON.stringify(App.user));
+
+            if(App.user.profile == "Administrador"){
+                $(".main-nav li[menu=3]").removeClass('hide');
+                $('.main-nav li[menu=1] a[href="new_apply"]').removeClass('hide');
+            }else{
+                $(".main-nav li[menu=3]").addClass('hide');
+                $('.main-nav li[menu=1] a[href="new_apply"]').addClass('hide');
+            }
+            
             
             if(window.location.pathname == '/login'){
                 if(!Backbone.History.started){
@@ -159,7 +185,15 @@ App.loginComplete = function(){
     App.resizeMe();
     $('.masthead').removeClass('hide');
     $('.login-txt').text(App.user.name + ' ' + App.user.surname);
-    this.mapView = new App.View.Map();
+    this.mapView = new App.View.Map({'idProgram': App.programView.current});
+
+    this.programView.setMap(this.mapView);
+};
+
+App.logout = function(){
+    localStorage.clear();
+    App.user = null;
+    window.location.href = "/login";
 };
 
 App.setAjaxSetup = function(){
@@ -200,6 +234,16 @@ App.showView = function(view) {
  
     this.$main.html(this.currentView.el);  
     this.scrollTop();
+}
+
+App.setProgram = function(id) {
+    
+    if(!this.programView){
+        this.programView = new App.View.Program({current:id});
+        this.$programs.html(this.programView.el);
+    }else{
+        this.programView.setCurrent(id);
+    }   
 }
 
 
@@ -245,6 +289,15 @@ App.getBrowserInfo = function(){
     if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
     return M.join(' ');
 }
+
+App.checkInputByName = function(_this, name){
+    if(_this.$('input[name="' + name + '"]').val() == ""){
+        _this.$('input[name="' + name + '"]').addClass('error');
+        return true;
+    }
+
+    return false;
+},
 
 
 App.formatNumber = function (n,decimals){

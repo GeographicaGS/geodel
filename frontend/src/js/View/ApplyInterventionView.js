@@ -29,7 +29,7 @@ App.View.ApplyIntervention = Backbone.View.extend({
         });
 
         var _this = this;
-        this.model.url = App.config.API_URL + "/post_apply_intervention/" + this.model.get('solicitud');
+        this.model.url = App.config.API_URL + "/post_apply_intervention/" + this.model.get('id');
         this.model.save('', '', 
             {success: function(){
                 _this.superView.closePanel($(e.currentTarget));

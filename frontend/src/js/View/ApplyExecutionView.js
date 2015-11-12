@@ -25,7 +25,7 @@ App.View.ApplyExecution = Backbone.View.extend({
         });
         
         var _this = this;
-        this.model.url = App.config.API_URL + "/post_apply_execute/" + this.model.get('solicitud');
+        this.model.url = App.config.API_URL + "/post_apply_execute/" + this.model.get('id');
         this.model.save('', '', 
             {success: function(){
                 _this.superView.closePanel($(e.currentTarget));
