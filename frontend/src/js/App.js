@@ -189,9 +189,9 @@ App.loginComplete = function(){
     App.resizeMe();
     $('.masthead').removeClass('hide');
     $('.login-txt').text(App.user.name + ' ' + App.user.surname);
-    this.mapView = new App.View.Map({'idProgram': App.programView.current});
+    // this.mapView = new App.View.Map({'idProgram': App.programView.current});
 
-    this.programView.setMap(this.mapView);
+    // this.programView.setMap(this.mapView);
 };
 
 App.logout = function(){
@@ -242,12 +242,20 @@ App.showView = function(view) {
 
 App.setProgram = function(id) {
     
+    //Incializo el programa
     if(!this.programView){
         this.programView = new App.View.Program({current:id});
         this.$programs.html(this.programView.el);
+
     }else{
         this.programView.setCurrent(id);
-    }   
+    } 
+
+    //Inicializo el mapa
+    if(!this.mapView && id){
+        this.mapView = new App.View.Map({'idProgram': this.programView.current});
+        this.programView.setMap(this.mapView);
+    }  
 }
 
 
