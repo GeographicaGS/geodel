@@ -20,7 +20,6 @@ App.Router = Backbone.Router.extend({
         "program/:id_program/admin" : "userList",
         "program/:id_program/user/:id" : "user",
         "program/:id_program/new_user" : "user",
-        // "home" : "home",
 
         "login" : "login",
 

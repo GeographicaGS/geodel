@@ -128,13 +128,17 @@ App.isLogin = function(){
         App.doLogin(this.user)
 
     }else{
-        if(window.location.pathname != '/login'){
-            Backbone.history.start({pushState: true, silent: true});
+        
+        Backbone.history.start({pushState: true});
+
+        if(window.location.pathname != '/login' && window.location.hash != '#login'){
+            // Backbone.history.start({pushState: true, silent: true});
             App.router.navigate('login',{trigger: true});
             App.resizeMe();
-        }else{
-            Backbone.history.start({pushState: true});
         }
+        // else{
+        //     Backbone.history.start({pushState: true});
+        // }
         
     }
 };
@@ -158,7 +162,7 @@ App.doLogin = function(user){
             }
             
             
-            if(window.location.pathname == '/login'){
+            if(window.location.pathname == '/login' || window.location.hash == '#login'){
                 if(!Backbone.History.started){
                     Backbone.history.start({pushState: true, silent: true});
                 }
