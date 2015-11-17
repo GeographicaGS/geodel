@@ -152,11 +152,51 @@ Map = {
 		});
 	},
 
+	drawTowns:function(towns){
+		var geoJSON = Array();
+		var coordinates;
+
+		var style = {
+		    "color": "#566163",
+		    "weight": 1,
+		    "opacity": 0.8
+		};
+
+		$.each(towns, function(){
+			coordinates = JSON.parse(this.geom).coordinates;
+			if(coordinates.length > 0){
+				geoJSON.push({
+					'type': 'Feature',
+					'properties': {
+						'name':this.name
+					},
+					'geometry': {
+						'type': "Polygon",
+	        			'coordinates': coordinates
+					}
+				});
+			}
+		});
+
+		L.geoJson(geoJSON,{
+			style: style,
+			onEachFeature: onEachFeature
+		}).addTo(this.__map);
+
+
+	},
+
 	getMap: function() {
 		return this.__map;
 	}
 }
 
+
+function onEachFeature(feature, layer) {
+    if (feature.properties && feature.properties.name) {
+        layer.bindPopup('<div class="header" style="border:none;"><span>Municipio:<br></span>' + feature.properties.name + '</div>', {className: 'apply_poup'});
+    }
+}
 
 
 

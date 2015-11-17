@@ -59,6 +59,7 @@ deps.JS = [
     'js/collection/IndicatorCollection.js',
     'js/collection/UserCollection.js',
     'js/collection/ProgramCollection.js',
+    'js/collection/TownGeomCollection.js',
     
     // router
     'js/Router.js',

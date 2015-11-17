@@ -4,6 +4,7 @@ function init(callback){
     module.exports.ApplyModel = new (require('./applymodel.js'));
     module.exports.IndicatorModel = new (require('./indicatormodel.js'));
     module.exports.ProgramModel = new (require('./programmodel.js'));
+    module.exports.TownModel = new (require('./townmodel.js'));
     callback();
 }
 
